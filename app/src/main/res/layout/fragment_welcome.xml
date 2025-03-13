@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        tools:context=".presentation.WelcomeFragment">
+
+        <ImageView
+            android:id="@+id/ivLogoWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/welcome_logo"
+            android:src="@drawable/welcome"
+            android:layout_margin="32dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/quick_math"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            android:textColor="@color/black_green"
+            android:textAlignment="center"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivLogoWelcome" />
+
+
+        <TextView
+            android:id="@+id/tvRulesTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/rules"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="@color/low_black_greed"
+            android:textAlignment="center"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />      \
+
+
+        <TextView
+            android:id="@+id/tvRulesDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/rules_description"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/low_black_greed"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRulesTitle" />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginHorizontal="16dp"
+            android:textAllCaps="true"
+            android:text="Got it!"
+            android:textSize="24dp"
+            
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</ScrollView>
