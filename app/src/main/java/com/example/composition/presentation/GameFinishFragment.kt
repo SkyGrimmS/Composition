@@ -1,17 +1,19 @@
 package com.example.composition.presentation
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.example.composition.databinding.FragmentWelcomeBinding
+import com.example.composition.R
+import com.example.composition.databinding.FragmentGameFinishBinding
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class WelcomeFragment : Fragment() {
-    private lateinit var binding: FragmentWelcomeBinding
+class GameFinishFragment : Fragment() {
+    private lateinit var binding: FragmentGameFinishBinding
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -26,16 +28,15 @@ class WelcomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View {
-
-        binding = FragmentWelcomeBinding.inflate(layoutInflater)
+    ): View? {
+        binding = FragmentGameFinishBinding.inflate(layoutInflater)
         return binding.root
-
     }
 
     companion object {
+
         fun newInstance(param1: String, param2: String) =
-            WelcomeFragment().apply {
+            GameFinishFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

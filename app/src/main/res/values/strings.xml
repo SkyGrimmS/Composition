@@ -1,13 +1,32 @@
 <resources>
-    <string name="app_name">Composition</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="welcome_logo">Welcome LOGO</string>
-    <string name="quick_math">Quick Math</string>
-    <string name="rules">Rules</string>
-    <string name="rules_description">You will see three shapes: two at the bottom and one at the top. Two of them will contain numbers. \n
+    <string name="app_name">Composition</string>\
 
-The goal is to make the sum of the numbers in the two bottom shapes equal to the number in the top shape by inserting the missing number.\n
+    <string name="question_mark">?</string>
 
-Example: If the top circle contains the number 7, one of the bottom shapes has a question mark, and the other has the number 4, then the missing number should be 3 because 3 + 4 = 7.</string>
+
+    <string name="iv_welcome_logo">Welcome LOGO</string>
+    <string name="iv_game_over">Game Over</string>
+
+    <string name="btn_welcome_text">Got it!</string>
+    <string name="btn_chose_test_text">TEST</string>
+    <string name="btn_choose_easy_text">EASY</string>
+    <string name="btn_choose_normal_text">NORMAL</string>
+    <string name="btn_choose_hard_text">HARD</string>
+    <string name="btn_finish_text">Try again</string>
+
+
+
+    <string name="title_welcome_screen">Quick Math</string>
+    <string name="title_rules">Rules</string>
+    <string name="title_level_difficulty">Choose Level Difficulty</string>
+
+
+    <string name="description_rules">You will see three shapes: two at the bottom and one at the top. Two of them will contain numbers. \nThe goal is to make the sum of the numbers in the two bottom shapes equal to the number in the top shape by inserting the missing number.\n \nExample: If the top circle contains the number 7, one of the bottom shapes has a question mark, and the other has the number 4, then the missing number should be 3 because 3 + 4 = 7.</string>
+    <string name="description_right_answers">Right answers: %s (min: %s)</string>
+    <string name="description_required_score_tv">The required number of correct answers: %s</string>
+    <string name="description_score_answers_tv">Your score: %s</string>
+    <string name="description_needed_answers_percentage_tv">The required percentage of correct answers: %s</string>
+    <string name="description_percentage_answers">Percentage of correct answers: %s</string>
+
+
 </resources>

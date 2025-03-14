@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="black_green">#101F00</color>
     <color name="low_black_greed">#355F06</color>
+    <color name="light_gray">#E4E4DE</color>
+    <color name="light_purple">#666AEB</color>
+
 </resources>
