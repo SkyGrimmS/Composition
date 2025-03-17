@@ -1,46 +1,73 @@
 package com.example.composition.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.composition.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.composition.databinding.FragmentGameFinishBinding
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.composition.domain.entity.GameResult
+import com.example.composition.utils.KEY_RESULT
+import com.example.composition.utils.handleOnBackPressed
 
 class GameFinishFragment : Fragment() {
     private lateinit var binding: FragmentGameFinishBinding
-
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var gameResult: GameResult
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
         }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentGameFinishBinding.inflate(layoutInflater)
+
+        parseArgs()
+        setListeners()
+
         return binding.root
     }
 
-    companion object {
+    private fun setListeners(){
+        with(binding){
 
-        fun newInstance(param1: String, param2: String) =
-            GameFinishFragment().apply {
+            btnGameFinish.setOnClickListener {
+                onRetryGame()
+            }
+        }
+
+        requireActivity().handleOnBackPressed(lifecycle = this){
+            onRetryGame()
+        }
+    }
+
+    private fun onRetryGame(){
+        requireActivity().supportFragmentManager.popBackStack(
+            GameFragment.NAME,
+            FragmentManager.POP_BACK_STACK_INCLUSIVE
+        )
+    }
+
+    private fun parseArgs() {
+        requireArguments().let { args ->
+             gameResult = args.getParcelable(KEY_RESULT, GameResult::class.java)
+                ?: throw IllegalArgumentException("Game result argument is missing!")
+        }
+    }
+
+    companion object {
+        fun newInstance(result: GameResult): GameFinishFragment {
+            return GameFinishFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putParcelable(KEY_RESULT, result)
                 }
             }
+        }
     }
 }
