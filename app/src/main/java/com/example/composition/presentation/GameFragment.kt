@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.WithHint
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,7 +25,7 @@ class GameFragment : Fragment() {
         )[GameViewModel::class.java]
     }
 
-    private lateinit var tvOptions: MutableList<TextView>
+
     private lateinit var binding: FragmentGameBinding
     private lateinit var level: Level
 
@@ -41,12 +42,12 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentGameBinding.inflate(layoutInflater)
+        val tvOptions = getAnswerOptionsList()
 
-
-        parseArgs()
+        getLevel()
         setListeners(tvOptions)
-        initAnswerOptionsList()
-        setupObservers()
+        getAnswerOptionsList()
+        setupObservers(tvOptions)
 
         viewModel.startGame(level)
         return binding.root
@@ -67,15 +68,21 @@ class GameFragment : Fragment() {
             .commit()
     }
 
-    private fun setupObservers() {
+    private fun setupObservers(tvOptions: MutableList<TextView>) {
         with(binding) {
 
-            viewModel.question.observe(viewLifecycleOwner) {
-                tvSum.text = String.format(it.sum.toString())
-                tvLeftNumber.text = String.format(it.visibleNumber.toString())
+            viewModel.question.observe(viewLifecycleOwner) { question ->
+                tvSum.text = String.format(question.sum.toString())
+                tvLeftNumber.text = String.format(question.visibleNumber.toString())
 
                 for (i in 0 until tvOptions.size) {
-                    tvOptions[i].text = String.format(it.options[i].toString())
+                    with(tvOptions[i]) {
+                        this.text = String.format(question.options[i].toString())
+                        this.setOnClickListener {
+                            viewModel.chooseAnswer(question.options[i])
+                        }
+                    }
+
                 }
             }
 
@@ -106,11 +113,9 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun initAnswerOptionsList() {
+    private fun getAnswerOptionsList(): MutableList<TextView> {
         with(binding) {
-            tvOptions.addAll(
-                listOf(tvOption1, tvOption2, tvOption3, tvOption4, tvOption5, tvOption6)
-            )
+            return mutableListOf(tvOption1, tvOption2, tvOption3, tvOption4, tvOption5, tvOption6)
         }
     }
 
@@ -124,7 +129,7 @@ class GameFragment : Fragment() {
         return ContextCompat.getColor(requireContext(), colorResId)
     }
 
-    private fun parseArgs() {
+    private fun getLevel() {
         level = requireArguments().getParcelable(KEY_LEVEL, Level::class.java)
             ?: throw IllegalArgumentException("Level argument is missing!")
     }
@@ -137,6 +142,7 @@ class GameFragment : Fragment() {
                 }
             }
         }
+
         const val NAME = "game_fragment"
     }
 }
