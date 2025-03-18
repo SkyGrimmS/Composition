@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.widget.WithHint
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,18 +23,7 @@ class GameFragment : Fragment() {
             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
         )[GameViewModel::class.java]
     }
-
-
     private lateinit var binding: FragmentGameBinding
-    private lateinit var level: Level
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +31,8 @@ class GameFragment : Fragment() {
     ): View {
         binding = FragmentGameBinding.inflate(layoutInflater)
         val tvOptions = getAnswerOptionsList()
+        val level = getLevel()
 
-        getLevel()
         setListeners(tvOptions)
         getAnswerOptionsList()
         setupObservers(tvOptions)
@@ -110,6 +98,10 @@ class GameFragment : Fragment() {
             viewModel.gameResult.observe(viewLifecycleOwner) {
                 launchGameFinishFragment(it)
             }
+
+            viewModel.progressAnswers.observe(viewLifecycleOwner){
+                tvAnswersProgress.text = it
+            }
         }
     }
 
@@ -129,8 +121,8 @@ class GameFragment : Fragment() {
         return ContextCompat.getColor(requireContext(), colorResId)
     }
 
-    private fun getLevel() {
-        level = requireArguments().getParcelable(KEY_LEVEL, Level::class.java)
+    private fun getLevel():Level {
+        return requireArguments().getParcelable(KEY_LEVEL, Level::class.java)
             ?: throw IllegalArgumentException("Level argument is missing!")
     }
 
