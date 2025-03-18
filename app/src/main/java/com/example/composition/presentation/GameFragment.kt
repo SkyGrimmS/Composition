@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.composition.R
 import com.example.composition.databinding.FragmentGameBinding
 import com.example.composition.domain.entity.GameResult
-import com.example.composition.domain.entity.GameSettings
 import com.example.composition.domain.entity.Level
 import com.example.composition.utils.KEY_LEVEL
 
@@ -138,7 +137,6 @@ class GameFragment : Fragment() {
                 }
             }
         }
-
         const val NAME = "game_fragment"
     }
 }
