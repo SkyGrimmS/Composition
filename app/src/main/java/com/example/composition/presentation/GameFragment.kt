@@ -1,11 +1,15 @@
 package com.example.composition.presentation
 
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.composition.R
 import com.example.composition.databinding.FragmentGameBinding
 import com.example.composition.domain.entity.GameResult
@@ -14,9 +18,17 @@ import com.example.composition.domain.entity.Level
 import com.example.composition.utils.KEY_LEVEL
 
 class GameFragment : Fragment() {
+    private val viewModel: GameViewModel by lazy {
+        ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+        )[GameViewModel::class.java]
+    }
 
+    private lateinit var tvOptions: MutableList<TextView>
     private lateinit var binding: FragmentGameBinding
     private lateinit var level: Level
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,17 +43,20 @@ class GameFragment : Fragment() {
     ): View {
         binding = FragmentGameBinding.inflate(layoutInflater)
 
-        parseArgs()
-        setListeners()
 
+        parseArgs()
+        setListeners(tvOptions)
+        initAnswerOptionsList()
+        setupObservers()
+
+        viewModel.startGame(level)
         return binding.root
     }
 
-    private fun setListeners() {
-        with(binding) {
-            tvOption1.setOnClickListener {
-                // Just plug
-                launchGameFinishFragment(GameResult(true, 70, 100, GameSettings(10, 10, 1, 20)))
+    private fun setListeners(tvOptions: MutableList<TextView>) {
+        for (tvOption in tvOptions) {
+            tvOption.setOnClickListener {
+                viewModel.chooseAnswer(tvOption.text.toString().toInt())
             }
         }
     }
@@ -51,6 +66,63 @@ class GameFragment : Fragment() {
             .replace(R.id.main_container, GameFinishFragment.newInstance(result))
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun setupObservers() {
+        with(binding) {
+
+            viewModel.question.observe(viewLifecycleOwner) {
+                tvSum.text = String.format(it.sum.toString())
+                tvLeftNumber.text = String.format(it.visibleNumber.toString())
+
+                for (i in 0 until tvOptions.size) {
+                    tvOptions[i].text = String.format(it.options[i].toString())
+                }
+            }
+
+            viewModel.percentOfRightAnswers.observe(viewLifecycleOwner) {
+                pbScore.setProgress(it, true)
+            }
+
+            viewModel.enoughCountOfRightAnswers.observe(viewLifecycleOwner) {
+                tvAnswersProgress.setTextColor(getColorByState(it))
+            }
+
+            viewModel.enoughPercentOfRightAnswers.observe(viewLifecycleOwner) {
+                val color = getColorByState(it)
+                pbScore.progressTintList = ColorStateList.valueOf(color)
+            }
+
+            viewModel.formatedTime.observe(viewLifecycleOwner) {
+                tvTimer.text = it
+            }
+
+            viewModel.minPercent.observe(viewLifecycleOwner) {
+                pbScore.secondaryProgress = it
+            }
+
+            viewModel.gameResult.observe(viewLifecycleOwner) {
+                launchGameFinishFragment(it)
+            }
+        }
+    }
+
+    private fun initAnswerOptionsList() {
+        with(binding) {
+            tvOptions.addAll(
+                listOf(tvOption1, tvOption2, tvOption3, tvOption4, tvOption5, tvOption6)
+            )
+        }
+    }
+
+    private fun getColorByState(goodState: Boolean): Int {
+        val colorResId = if (goodState) {
+            android.R.color.holo_green_light
+        } else {
+            android.R.color.holo_red_light
+        }
+
+        return ContextCompat.getColor(requireContext(), colorResId)
     }
 
     private fun parseArgs() {
