@@ -34,19 +34,15 @@ class GameFragment : Fragment() {
         binding = FragmentGameBinding.inflate(layoutInflater)
         val tvOptions = getAnswerOptionsList()
 
-        setListeners(tvOptions)
+        setListeners()
         getAnswerOptionsList()
         setupObservers(tvOptions)
 
         return binding.root
     }
 
-    private fun setListeners(tvOptions: MutableList<TextView>) {
-        for (tvOption in tvOptions) {
-            tvOption.setOnClickListener {
-                viewModel.chooseAnswer(tvOption.text.toString().toInt())
-            }
-        }
+    private fun setListeners() {
+
     }
 
     private fun launchGameFinishFragment(result: GameResult) {
