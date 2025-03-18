@@ -34,16 +34,12 @@ class GameFragment : Fragment() {
         binding = FragmentGameBinding.inflate(layoutInflater)
         val tvOptions = getAnswerOptionsList()
 
-        setListeners()
         getAnswerOptionsList()
         setupObservers(tvOptions)
 
         return binding.root
     }
 
-    private fun setListeners() {
-
-    }
 
     private fun launchGameFinishFragment(result: GameResult) {
         requireActivity().supportFragmentManager.beginTransaction()
