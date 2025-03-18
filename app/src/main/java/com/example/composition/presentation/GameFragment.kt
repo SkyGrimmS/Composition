@@ -77,7 +77,7 @@ class GameFragment : Fragment() {
             }
 
             viewModel.minPercent.observe(viewLifecycleOwner) {
-                pbScore.secondaryProgress = it
+                pbScore.secondaryProgress = it.toInt()
             }
 
             viewModel.gameResult.observe(viewLifecycleOwner) {

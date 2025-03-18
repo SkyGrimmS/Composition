@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.composition.R
 import com.example.composition.databinding.FragmentGameFinishBinding
+import com.example.composition.domain.entity.GameResult
 
 class GameFinishFragment : Fragment() {
 
@@ -21,9 +22,9 @@ class GameFinishFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentGameFinishBinding.inflate(layoutInflater)
-
+        val result = args.result
         setListeners()
-        bindViews()
+        bindViews(result)
 
         return binding.root
     }
@@ -37,45 +38,45 @@ class GameFinishFragment : Fragment() {
         }
     }
 
-    private fun bindViews() {
+    private fun bindViews(result: GameResult) {
         with(binding) {
 
-            ivEmojiResult.setImageResource(getSmileId())
+            ivEmojiResult.setImageResource(getSmileId(result))
             tvRequiredAnswers.text = String.format(
                 getString(R.string.description_required_score_tv),
-                args.result.gameSettings.minCountOfRightAnswers.toString()
+                result.gameSettings.minCountOfRightAnswers
             )
 
             tvScoreAnswers.text = String.format(
                 getString(R.string.description_score_answers_tv),
-                args.result.countOfRightAnswers.toString()
+                result.countOfRightAnswers
             )
 
             tvRequiredPercentage.text = String.format(
                 getString(R.string.description_needed_answers_percentage_tv),
-                args.result.gameSettings.minPercentOfRightAnswers.toString()
+                result.gameSettings.minPercentOfRightAnswers
             )
 
             tvScorePercentage.text = String.format(
                 getString(R.string.description_percentage_answers),
-                getPercentOfRightAnswers()
+                getPercentOfRightAnswers(result)
             )
         }
     }
 
-    private fun getSmileId(): Int {
-        return if (args.result.winner) {
+    private fun getSmileId(result: GameResult): Int {
+        return if (result.winner) {
             R.drawable.happy_smile_icon
         } else {
             R.drawable.sad_smile_icon
         }
     }
 
-    private fun getPercentOfRightAnswers() = with(args.result) {
-        if (countOfRightAnswers == 0) {
-            0
+    private fun getPercentOfRightAnswers(result: GameResult): Float = with(result) {
+        if (countOfRightAnswers != 0) {
+            ((countOfRightAnswers) / countOfQuestions.toFloat() * 100)
         } else {
-            ((countOfRightAnswers) / countOfQuestions.toDouble() * 100).toString()
+            this.countOfRightAnswers.toFloat()
         }
     }
 

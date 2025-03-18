@@ -34,25 +34,25 @@ object GameRepositoryImpl: GameRepository {
             Level.TEST -> GameSettings(
                 maxSumValue = 10,
                 minCountOfRightAnswers = 3,
-                minPercentOfRightAnswers = 50,
+                minPercentOfRightAnswers = 50.00,
                 gameTimeInSeconds = 8
             )
             Level.EASY -> GameSettings(
                 maxSumValue = 10,
                 minCountOfRightAnswers = 10,
-                minPercentOfRightAnswers = 70,
+                minPercentOfRightAnswers = 70.00,
                 gameTimeInSeconds = 60
             )
             Level.NORMAL -> GameSettings(
                 maxSumValue = 20,
                 minCountOfRightAnswers = 20,
-                minPercentOfRightAnswers = 80,
+                minPercentOfRightAnswers = 80.00,
                 gameTimeInSeconds = 40
             )
             Level.HARD -> GameSettings(
                 maxSumValue = 30,
                 minCountOfRightAnswers = 30,
-                minPercentOfRightAnswers = 90,
+                minPercentOfRightAnswers = 90.00,
                 gameTimeInSeconds = 40
             )
         }

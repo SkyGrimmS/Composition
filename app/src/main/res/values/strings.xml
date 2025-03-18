@@ -23,10 +23,10 @@
 
     <string name="description_rules">You will see three shapes: two at the bottom and one at the top. Two of them will contain numbers. \nThe goal is to make the sum of the numbers in the two bottom shapes equal to the number in the top shape by inserting the missing number.\n \nExample: If the top circle contains the number 7, one of the bottom shapes has a question mark, and the other has the number 4, then the missing number should be 3 because 3 + 4 = 7.</string>
     <string name="description_right_answers">Right answers: %s (min: %s)</string>
-    <string name="description_required_score_tv">The required number of correct answers: %s</string>
-    <string name="description_score_answers_tv">Your score: %s</string>
-    <string name="description_needed_answers_percentage_tv">The required percentage of correct answers: %s</string>
-    <string name="description_percentage_answers">Percentage of correct answers: %s</string>
+    <string name="description_required_score_tv">The required number of correct answers: %d</string>
+    <string name="description_score_answers_tv">Your score: %d</string>
+    <string name="description_needed_answers_percentage_tv">The required percentage of correct answers: %.2f</string>
+    <string name="description_percentage_answers">Percentage of correct answers: %.2f</string>
 
 
 </resources>

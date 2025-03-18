@@ -54,8 +54,8 @@ class GameViewModel(
     val enoughPercentOfRightAnswers: LiveData<Boolean>
         get() = _enoughPercentOfRightAnswers
 
-    private val _minPercent = MutableLiveData<Int>()
-    val minPercent: LiveData<Int>
+    private val _minPercent = MutableLiveData<Double>()
+    val minPercent: LiveData<Double>
         get() = _minPercent
 
     private val _gameResult = MutableLiveData<GameResult>()
