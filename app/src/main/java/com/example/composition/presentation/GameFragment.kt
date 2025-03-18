@@ -17,12 +17,14 @@ import com.example.composition.domain.entity.Level
 import com.example.composition.utils.KEY_LEVEL
 
 class GameFragment : Fragment() {
-    private val viewModel: GameViewModel by lazy {
-        ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-        )[GameViewModel::class.java]
+
+    private val viewModelFactory by lazy {
+        GameViewModelFactory(getLevel(), requireActivity().application)
     }
+    private val viewModel: GameViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
+    }
+
     private lateinit var binding: FragmentGameBinding
 
     override fun onCreateView(
@@ -31,13 +33,11 @@ class GameFragment : Fragment() {
     ): View {
         binding = FragmentGameBinding.inflate(layoutInflater)
         val tvOptions = getAnswerOptionsList()
-        val level = getLevel()
 
         setListeners(tvOptions)
         getAnswerOptionsList()
         setupObservers(tvOptions)
 
-        viewModel.startGame(level)
         return binding.root
     }
 
@@ -99,7 +99,7 @@ class GameFragment : Fragment() {
                 launchGameFinishFragment(it)
             }
 
-            viewModel.progressAnswers.observe(viewLifecycleOwner){
+            viewModel.progressAnswers.observe(viewLifecycleOwner) {
                 tvAnswersProgress.text = it
             }
         }
@@ -121,7 +121,7 @@ class GameFragment : Fragment() {
         return ContextCompat.getColor(requireContext(), colorResId)
     }
 
-    private fun getLevel():Level {
+    private fun getLevel(): Level {
         return requireArguments().getParcelable(KEY_LEVEL, Level::class.java)
             ?: throw IllegalArgumentException("Level argument is missing!")
     }
