@@ -5,7 +5,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.composition.R
 import com.example.composition.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,9 +20,6 @@ class MainActivity : AppCompatActivity() {
         setInsets()
 
     }
-
-
-
 
     private fun setInsets(){
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->

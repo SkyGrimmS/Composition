@@ -17,10 +17,8 @@ import com.example.composition.domain.usecases.GetGameSettingsUseCase
 
 class GameViewModel(
     private val application: Application,
-    private val level: Level
+    private val level: Level,
 ) : ViewModel() {
-
-
 
     private lateinit var gameSettings: GameSettings
 
@@ -140,7 +138,7 @@ class GameViewModel(
     }
 
     private fun calculatePercentOfRightAnswers(): Int {
-        if (countOfRightAnswers == 0){
+        if (countOfRightAnswers == 0) {
             return 0
         }
         return ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt()
@@ -157,7 +155,8 @@ class GameViewModel(
             gameSettings.minCountOfRightAnswers
         )
 
-        _enoughCountOfRightAnswers.value = countOfRightAnswers >= gameSettings.minCountOfRightAnswers
+        _enoughCountOfRightAnswers.value =
+            countOfRightAnswers >= gameSettings.minCountOfRightAnswers
         _enoughPercentOfRightAnswers.value = percent >= gameSettings.minPercentOfRightAnswers
 
     }

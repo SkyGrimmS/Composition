@@ -5,20 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.composition.R
+import androidx.navigation.fragment.findNavController
 import com.example.composition.databinding.FragmentChooseLevelBinding
 import com.example.composition.domain.entity.Level
 
 class ChooseLevelFragment : Fragment() {
 
     private lateinit var binding: FragmentChooseLevelBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,8 +24,8 @@ class ChooseLevelFragment : Fragment() {
         return binding.root
     }
 
-    private fun setListeners(){
-        with(binding){
+    private fun setListeners() {
+        with(binding) {
 
             listOf(
                 btnLevelTest to Level.TEST,
@@ -45,16 +38,9 @@ class ChooseLevelFragment : Fragment() {
         }
     }
 
-    private fun launchGameFragment(level: Level){
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, GameFragment.newInstance(level))
-            .addToBackStack(GameFragment.NAME)
-            .commit()
-    }
-
-    companion object {
-        fun newInstance(): ChooseLevelFragment {
-            return ChooseLevelFragment()
-        }
+    private fun launchGameFragment(level: Level) {
+        findNavController().navigate(
+            ChooseLevelFragmentDirections.actionChooseLevelFragmentToGameFragment(level)
+        )
     }
 }

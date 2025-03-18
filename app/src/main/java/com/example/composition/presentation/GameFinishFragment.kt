@@ -5,23 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.composition.R
 import com.example.composition.databinding.FragmentGameFinishBinding
-import com.example.composition.domain.entity.GameResult
-import com.example.composition.utils.KEY_RESULT
-import com.example.composition.utils.handleOnBackPressed
 
 class GameFinishFragment : Fragment() {
+
+    private val args by navArgs<GameFinishFragmentArgs>()
+
     private lateinit var binding: FragmentGameFinishBinding
-    private lateinit var gameResult: GameResult
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +22,6 @@ class GameFinishFragment : Fragment() {
     ): View {
         binding = FragmentGameFinishBinding.inflate(layoutInflater)
 
-        parseArgs()
         setListeners()
         bindViews()
 
@@ -43,10 +35,6 @@ class GameFinishFragment : Fragment() {
                 onRetryGame()
             }
         }
-
-        requireActivity().handleOnBackPressed(lifecycle = this) {
-            onRetryGame()
-        }
     }
 
     private fun bindViews() {
@@ -55,17 +43,17 @@ class GameFinishFragment : Fragment() {
             ivEmojiResult.setImageResource(getSmileId())
             tvRequiredAnswers.text = String.format(
                 getString(R.string.description_required_score_tv),
-                gameResult.gameSettings.minCountOfRightAnswers.toString()
+                args.result.gameSettings.minCountOfRightAnswers.toString()
             )
 
             tvScoreAnswers.text = String.format(
                 getString(R.string.description_score_answers_tv),
-                gameResult.countOfRightAnswers.toString()
+                args.result.countOfRightAnswers.toString()
             )
 
             tvRequiredPercentage.text = String.format(
                 getString(R.string.description_needed_answers_percentage_tv),
-                gameResult.gameSettings.minPercentOfRightAnswers.toString()
+                args.result.gameSettings.minPercentOfRightAnswers.toString()
             )
 
             tvScorePercentage.text = String.format(
@@ -76,14 +64,14 @@ class GameFinishFragment : Fragment() {
     }
 
     private fun getSmileId(): Int {
-        return if (gameResult.winner) {
+        return if (args.result.winner) {
             R.drawable.happy_smile_icon
         } else {
             R.drawable.sad_smile_icon
         }
     }
 
-    private fun getPercentOfRightAnswers() = with(gameResult) {
+    private fun getPercentOfRightAnswers() = with(args.result) {
         if (countOfRightAnswers == 0) {
             0
         } else {
@@ -92,26 +80,6 @@ class GameFinishFragment : Fragment() {
     }
 
     private fun onRetryGame() {
-        requireActivity().supportFragmentManager.popBackStack(
-            GameFragment.NAME,
-            FragmentManager.POP_BACK_STACK_INCLUSIVE
-        )
-    }
-
-    private fun parseArgs() {
-        requireArguments().let { args ->
-            gameResult = args.getParcelable(KEY_RESULT, GameResult::class.java)
-                ?: throw IllegalArgumentException("Game result argument is missing!")
-        }
-    }
-
-    companion object {
-        fun newInstance(result: GameResult): GameFinishFragment {
-            return GameFinishFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(KEY_RESULT, result)
-                }
-            }
-        }
+        findNavController().popBackStack()
     }
 }

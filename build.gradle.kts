@@ -2,4 +2,15 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
+    id("org.jetbrains.kotlin.kapt") version "2.1.20-RC3"
+}
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath(libs.androidx.navigation.safe.args.gradle.plugin)
+    }
 }
