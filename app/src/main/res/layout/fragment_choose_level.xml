@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    android:orientation="vertical"
+    tools:context=".presentation.ChooseLevelFragment">
+
+
+    <TextView
+        android:id="@+id/tvRulesTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/title_level_difficulty"
+        android:textAlignment="center"
+        android:textColor="@color/low_black_greed"
+        android:textSize="36sp"
+        android:textStyle="bold"
+
+        />
+
+    <Button
+        android:id="@+id/btnLevelTest"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/btn_chose_test_text"
+        android:textAllCaps="true"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btnLevelEasy"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:text="@string/btn_choose_easy_text"
+        android:textAllCaps="true"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btnLevelNormal"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:text="@string/btn_choose_normal_text"
+        android:textAllCaps="true"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btnLevelHard"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:text="@string/btn_choose_hard_text"
+        android:textAllCaps="true"
+        android:textSize="24sp" />
+
+
+</LinearLayout>
