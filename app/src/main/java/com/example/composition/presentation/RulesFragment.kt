@@ -27,12 +27,9 @@ class RulesFragment : Fragment() {
     private fun setupListeners() {
         with(binding) {
             btnWelcome.setOnClickListener {
-                launchChooseLevelFragment()
+
             }
         }
     }
 
-    private fun launchChooseLevelFragment() {
-        findNavController().navigate(R.id.)
-    }
 }

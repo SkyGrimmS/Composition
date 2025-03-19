@@ -7,12 +7,16 @@
     <string name="iv_welcome_logo">Welcome LOGO</string>
     <string name="iv_game_over">Game Over</string>
 
+
     <string name="btn_welcome_text">Got it!</string>
     <string name="btn_chose_test_text">TEST</string>
     <string name="btn_choose_easy_text">EASY</string>
     <string name="btn_choose_normal_text">NORMAL</string>
     <string name="btn_choose_hard_text">HARD</string>
     <string name="btn_finish_text">Try again</string>
+    <string name="btn_start_game_title">Start</string>
+    <string name="btn_custom_game_title">Custom game</string>
+    <string name="btn_rules_title">Rules</string>
 
 
     <string name="title_welcome_screen">Quick Math</string>
@@ -26,9 +30,6 @@
     <string name="description_score_answers_tv">Your score: %d</string>
     <string name="description_needed_answers_percentage_tv">The required percentage of correct answers: %.2f</string>
     <string name="description_percentage_answers">Percentage of correct answers: %.2f</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="btn_start_game_title">Start</string>
 
 
 </resources>
