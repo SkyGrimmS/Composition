@@ -36,10 +36,20 @@ class GameMainMenuFragment : Fragment() {
                 launchRulesFragment()
             }
 
+            bntCustomGame.setOnClickListener {
+                launchCustomGameFragment()
+            }
+
         }
 
 
 
+    }
+
+    private fun launchCustomGameFragment(){
+        findNavController().navigate(
+            GameMainMenuFragmentDirections.actionGameMainMenuFragmentToCustomGameSettingsFragment()
+        )
     }
 
     private fun launchRulesFragment() {

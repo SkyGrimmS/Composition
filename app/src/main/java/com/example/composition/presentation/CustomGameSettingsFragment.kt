@@ -53,10 +53,10 @@ class CustomGameSettingsFragment : Fragment() {
         )
     }
 
-    private fun launchGameFragment(gameSettings: GameSettings, ) {
-        findNavController().navigate(
-            CustomGameSettingsFragmentDirections.actionCustomGameSettingsFragmentToGameFragment()
-        )
-    }
+//    private fun launchGameFragment(gameSettings: GameSettings, ) {
+//        findNavController().navigate(
+//            CustomGameSettingsFragmentDirections.actionCustomGameSettingsFragmentToGameFragment()
+//        )
+//    }
 
 }

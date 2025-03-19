@@ -40,6 +40,7 @@
     <string name="hint_max_sum_value">Max sum value:</string>
     <string name="hint_min_count_of_right_answers">Min count of right answers:</string>
     <string name="hint_min_percent_of_right_answers">Min percent of right answers:</string>
+    <string name="hint_game_time">Game time (in seconds):</string>
 
 
 </resources>

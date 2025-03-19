@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_gray"
     tools:context=".presentation.CustomGameSettingsFragment">
 
     <TextView
@@ -103,7 +104,7 @@
             android:id="@+id/etGameTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_max_sum_value"
+            android:hint="@string/hint_game_time"
             android:inputType="textCapWords"
             android:textSize="20sp" />
 
