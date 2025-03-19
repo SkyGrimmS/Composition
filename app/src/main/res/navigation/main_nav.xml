@@ -3,16 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/welcomeFragment">
+    app:startDestination="@id/gameMainMenuFragment">
 
-    <fragment
-        android:id="@+id/welcomeFragment"
-        android:name="com.example.composition.presentation.WelcomeFragment"
-        android:label="WelcomeFragment" >
-        <action
-            android:id="@+id/action_welcomeFragment_to_chooseLevelFragment"
-            app:destination="@id/chooseLevelFragment" />
-    </fragment>
     <fragment
         android:id="@+id/chooseLevelFragment"
         android:name="com.example.composition.presentation.ChooseLevelFragment"
@@ -21,6 +13,9 @@
         <action
             android:id="@+id/action_chooseLevelFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_chooseLevelFragment_to_gameMainMenuFragment"
+            app:destination="@id/gameMainMenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -44,5 +39,25 @@
         <argument
             android:name="result"
             app:argType="com.example.composition.domain.entity.GameResult" />
+    </fragment>
+    <fragment
+        android:id="@+id/rulesFragment"
+        android:name="com.example.composition.presentation.RulesFragment"
+        android:label="RulesFragment" >
+        <action
+            android:id="@+id/action_rulesFragment_to_gameMainMenuFragment"
+            app:destination="@id/gameMainMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameMainMenuFragment"
+        android:name="com.example.composition.presentation.GameMainMenuFragment"
+        android:label="fragment_game_main_menu"
+        tools:layout="@layout/fragment_game_main_menu" >
+        <action
+            android:id="@+id/action_gameMainMenuFragment_to_chooseLevelFragment"
+            app:destination="@id/chooseLevelFragment" />
+        <action
+            android:id="@+id/action_gameMainMenuFragment_to_rulesFragment"
+            app:destination="@id/rulesFragment" />
     </fragment>
 </navigation>

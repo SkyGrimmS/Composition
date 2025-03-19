@@ -7,16 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.composition.R
-import com.example.composition.databinding.FragmentWelcomeBinding
-class WelcomeFragment : Fragment() {
+import com.example.composition.databinding.FragmentRulesBinding
 
-    private lateinit var binding: FragmentWelcomeBinding
+class RulesFragment : Fragment() {
+
+    private lateinit var binding: FragmentRulesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentWelcomeBinding.inflate(layoutInflater)
+        binding = FragmentRulesBinding.inflate(layoutInflater)
 
         setupListeners()
 
@@ -32,6 +33,6 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun launchChooseLevelFragment() {
-        findNavController().navigate(R.id.action_welcomeFragment_to_chooseLevelFragment)
+        findNavController().navigate(R.id.)
     }
 }
