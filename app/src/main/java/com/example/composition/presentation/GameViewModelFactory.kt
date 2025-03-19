@@ -14,6 +14,7 @@ class GameViewModelFactory(
         if (modelClass.isAssignableFrom(GameViewModel::class.java)) {
             return GameViewModel(application, level) as T
         }
+
         throw RuntimeException("Unknown viewmodel class $modelClass ")
     }
 }

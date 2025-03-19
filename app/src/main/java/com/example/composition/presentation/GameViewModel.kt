@@ -67,6 +67,7 @@ class GameViewModel(
         startGame()
     }
 
+
     private fun startGame() {
         getGameSettings()
         startTimer()

@@ -6,5 +6,5 @@
         android:angle="270"
         android:endColor="@color/gradLightGreen"
         android:centerColor="@color/gradDarkGreen"
-        android:startColor="@color/light_purple" />
+        android:startColor="@color/gradDarkGreen" />
 </shape>

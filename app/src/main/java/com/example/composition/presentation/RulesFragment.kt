@@ -26,10 +26,16 @@ class RulesFragment : Fragment() {
 
     private fun setupListeners() {
         with(binding) {
-            btnWelcome.setOnClickListener {
-
+            btnGotItRules.setOnClickListener {
+                launchMainMenuFragment()
             }
         }
+    }
+
+    private fun launchMainMenuFragment(){
+        findNavController().navigate(
+            RulesFragmentDirections.actionRulesFragmentToGameMainMenuFragment()
+        )
     }
 
 }

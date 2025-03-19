@@ -9,7 +9,7 @@
         android:id="@+id/chooseLevelFragment"
         android:name="com.example.composition.presentation.ChooseLevelFragment"
         android:label="fragment_choose_level"
-        tools:layout="@layout/fragment_choose_level" >
+        tools:layout="@layout/fragment_choose_level">
         <action
             android:id="@+id/action_chooseLevelFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
@@ -17,11 +17,12 @@
             android:id="@+id/action_chooseLevelFragment_to_gameMainMenuFragment"
             app:destination="@id/gameMainMenuFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/gameFragment"
         android:name="com.example.composition.presentation.GameFragment"
         android:label="fragment_game"
-        tools:layout="@layout/fragment_game" >
+        tools:layout="@layout/fragment_game">
         <action
             android:id="@+id/action_gameFragment_to_gameFinishFragment"
             app:destination="@id/gameFinishFragment"
@@ -31,33 +32,51 @@
             android:name="level"
             app:argType="com.example.composition.domain.entity.Level" />
     </fragment>
+
     <fragment
         android:id="@+id/gameFinishFragment"
         android:name="com.example.composition.presentation.GameFinishFragment"
         android:label="fragment_game_finish"
-        tools:layout="@layout/fragment_game_finish" >
+        tools:layout="@layout/fragment_game_finish">
         <argument
             android:name="result"
             app:argType="com.example.composition.domain.entity.GameResult" />
     </fragment>
+
     <fragment
         android:id="@+id/rulesFragment"
         android:name="com.example.composition.presentation.RulesFragment"
-        android:label="RulesFragment" >
+        android:label="RulesFragment">
         <action
             android:id="@+id/action_rulesFragment_to_gameMainMenuFragment"
             app:destination="@id/gameMainMenuFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/gameMainMenuFragment"
         android:name="com.example.composition.presentation.GameMainMenuFragment"
         android:label="fragment_game_main_menu"
-        tools:layout="@layout/fragment_game_main_menu" >
+        tools:layout="@layout/fragment_game_main_menu">
         <action
             android:id="@+id/action_gameMainMenuFragment_to_chooseLevelFragment"
             app:destination="@id/chooseLevelFragment" />
         <action
             android:id="@+id/action_gameMainMenuFragment_to_rulesFragment"
             app:destination="@id/rulesFragment" />
+        <action
+            android:id="@+id/action_gameMainMenuFragment_to_customGameSettingsFragment"
+            app:destination="@id/customGameSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customGameSettingsFragment"
+        android:name="com.example.composition.presentation.CustomGameSettingsFragment"
+        android:label="fragment_custom_game_settings"
+        tools:layout="@layout/fragment_custom_game_settings">
+        <action
+            android:id="@+id/action_customGameSettingsFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_customGameSettingsFragment_to_gameMainMenuFragment"
+            app:destination="@id/gameMainMenuFragment" />
     </fragment>
 </navigation>

@@ -17,19 +17,29 @@
     <string name="btn_start_game_title">Start</string>
     <string name="btn_custom_game_title">Custom game</string>
     <string name="btn_rules_title">Rules</string>
-
+    <string name="bnt_back_title">Back</string>
 
     <string name="title_welcome_screen">Quick Math</string>
     <string name="title_rules">Rules</string>
-    <string name="title_level_difficulty">Choose Level Difficulty</string>
+    <string name="title_level_difficulty">Level Difficulty</string>
+    <string name="title_custom_game">Setup Game</string>
 
 
-    <string name="description_rules">You will see three shapes: two at the bottom and one at the top. Two of them will contain numbers. \nThe goal is to make the sum of the numbers in the two bottom shapes equal to the number in the top shape by inserting the missing number.\n \nExample: If the top circle contains the number 7, one of the bottom shapes has a question mark, and the other has the number 4, then the missing number should be 3 because 3 + 4 = 7.</string>
+    <string name="description_rules">You will see three shapes: two at the bottom and one at the top. Two of them will contain numbers. \n\nThe goal is to make the sum of the numbers in the two bottom shapes equal to the number in the top shape by inserting the missing number.\n \nExample: If the top circle contains the number 7, one of the bottom shapes has a question mark, and the other has the number 4, then the missing number should be 3 because 3 + 4 = 7.</string>
     <string name="description_right_answers">Right answers: %s (min: %s)</string>
     <string name="description_required_score_tv">The required number of correct answers: %d</string>
     <string name="description_score_answers_tv">Your score: %d</string>
     <string name="description_needed_answers_percentage_tv">The required percentage of correct answers: %.2f</string>
     <string name="description_percentage_answers">Percentage of correct answers: %.2f</string>
+
+
+
+
+
+
+    <string name="hint_max_sum_value">Max sum value:</string>
+    <string name="hint_min_count_of_right_answers">Min count of right answers:</string>
+    <string name="hint_min_percent_of_right_answers">Min percent of right answers:</string>
 
 
 </resources>
