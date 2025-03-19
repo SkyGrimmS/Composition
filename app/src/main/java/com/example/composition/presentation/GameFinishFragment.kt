@@ -5,33 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.composition.R
 import com.example.composition.databinding.FragmentGameFinishBinding
 import com.example.composition.domain.entity.GameResult
-import com.example.composition.utils.KEY_RESULT
-import com.example.composition.utils.handleOnBackPressed
 
 class GameFinishFragment : Fragment() {
+
+    private val args by navArgs<GameFinishFragmentArgs>()
+
     private lateinit var binding: FragmentGameFinishBinding
-    private lateinit var gameResult: GameResult
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentGameFinishBinding.inflate(layoutInflater)
-
-        parseArgs()
+        val result = args.result
         setListeners()
-        bindViews()
+        bindViews(result)
 
         return binding.root
     }
@@ -43,75 +36,51 @@ class GameFinishFragment : Fragment() {
                 onRetryGame()
             }
         }
-
-        requireActivity().handleOnBackPressed(lifecycle = this) {
-            onRetryGame()
-        }
     }
 
-    private fun bindViews() {
+    private fun bindViews(result: GameResult) {
         with(binding) {
 
-            ivEmojiResult.setImageResource(getSmileId())
+            ivEmojiResult.setImageResource(getSmileId(result))
             tvRequiredAnswers.text = String.format(
                 getString(R.string.description_required_score_tv),
-                gameResult.gameSettings.minCountOfRightAnswers.toString()
+                result.gameSettings.minCountOfRightAnswers
             )
 
             tvScoreAnswers.text = String.format(
                 getString(R.string.description_score_answers_tv),
-                gameResult.countOfRightAnswers.toString()
+                result.countOfRightAnswers
             )
 
             tvRequiredPercentage.text = String.format(
                 getString(R.string.description_needed_answers_percentage_tv),
-                gameResult.gameSettings.minPercentOfRightAnswers.toString()
+                result.gameSettings.minPercentOfRightAnswers
             )
 
             tvScorePercentage.text = String.format(
                 getString(R.string.description_percentage_answers),
-                getPercentOfRightAnswers()
+                getPercentOfRightAnswers(result)
             )
         }
     }
 
-    private fun getSmileId(): Int {
-        return if (gameResult.winner) {
+    private fun getSmileId(result: GameResult): Int {
+        return if (result.winner) {
             R.drawable.happy_smile_icon
         } else {
             R.drawable.sad_smile_icon
         }
     }
 
-    private fun getPercentOfRightAnswers() = with(gameResult) {
-        if (countOfRightAnswers == 0) {
-            0
+    private fun getPercentOfRightAnswers(result: GameResult): Float = with(result) {
+        if (countOfRightAnswers != 0) {
+            ((countOfRightAnswers) / countOfQuestions.toFloat() * 100)
         } else {
-            ((countOfRightAnswers) / countOfQuestions.toDouble() * 100).toString()
+            this.countOfRightAnswers.toFloat()
         }
     }
 
     private fun onRetryGame() {
-        requireActivity().supportFragmentManager.popBackStack(
-            GameFragment.NAME,
-            FragmentManager.POP_BACK_STACK_INCLUSIVE
-        )
-    }
-
-    private fun parseArgs() {
-        requireArguments().let { args ->
-            gameResult = args.getParcelable(KEY_RESULT, GameResult::class.java)
-                ?: throw IllegalArgumentException("Game result argument is missing!")
-        }
-    }
-
-    companion object {
-        fun newInstance(result: GameResult): GameFinishFragment {
-            return GameFinishFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(KEY_RESULT, result)
-                }
-            }
-        }
+        findNavController().popBackStack()
     }
 }

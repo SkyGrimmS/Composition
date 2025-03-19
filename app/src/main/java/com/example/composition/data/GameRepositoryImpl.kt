@@ -13,7 +13,7 @@ object GameRepositoryImpl: GameRepository {
         private const val MIN_ANSWER_VALUE = 1
 
     override fun generateQuestion(maxSumValue: Int, countOfOptions: Int): Question {
-        val sum = Random.nextInt(MIN_SUM_VALUE, maxSumValue+1)
+        val sum = Random.nextInt(MIN_SUM_VALUE, maxSumValue + 1)
         val visibleNumber = Random.nextInt(MIN_ANSWER_VALUE, sum)
 
         val options = HashSet<Int>()
@@ -34,25 +34,25 @@ object GameRepositoryImpl: GameRepository {
             Level.TEST -> GameSettings(
                 maxSumValue = 10,
                 minCountOfRightAnswers = 3,
-                minPercentOfRightAnswers = 50,
+                minPercentOfRightAnswers = 50.00,
                 gameTimeInSeconds = 8
             )
             Level.EASY -> GameSettings(
                 maxSumValue = 10,
                 minCountOfRightAnswers = 10,
-                minPercentOfRightAnswers = 70,
+                minPercentOfRightAnswers = 70.00,
                 gameTimeInSeconds = 60
             )
             Level.NORMAL -> GameSettings(
                 maxSumValue = 20,
                 minCountOfRightAnswers = 20,
-                minPercentOfRightAnswers = 80,
+                minPercentOfRightAnswers = 80.00,
                 gameTimeInSeconds = 40
             )
             Level.HARD -> GameSettings(
                 maxSumValue = 30,
-                minCountOfRightAnswers = 30,
-                minPercentOfRightAnswers = 90,
+                minCountOfRightAnswers = 35,
+                minPercentOfRightAnswers = 90.00,
                 gameTimeInSeconds = 40
             )
         }

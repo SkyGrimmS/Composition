@@ -10,16 +10,17 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.composition.R
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.composition.databinding.FragmentGameBinding
 import com.example.composition.domain.entity.GameResult
-import com.example.composition.domain.entity.Level
-import com.example.composition.utils.KEY_LEVEL
 
 class GameFragment : Fragment() {
 
+    private val args by navArgs<GameFragmentArgs>()
+
     private val viewModelFactory by lazy {
-        GameViewModelFactory(getLevel(), requireActivity().application)
+        GameViewModelFactory(args.level, requireActivity().application)
     }
     private val viewModel: GameViewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
@@ -38,14 +39,6 @@ class GameFragment : Fragment() {
         setupObservers(tvOptions)
 
         return binding.root
-    }
-
-
-    private fun launchGameFinishFragment(result: GameResult) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, GameFinishFragment.newInstance(result))
-            .addToBackStack(null)
-            .commit()
     }
 
     private fun setupObservers(tvOptions: MutableList<TextView>) {
@@ -84,7 +77,7 @@ class GameFragment : Fragment() {
             }
 
             viewModel.minPercent.observe(viewLifecycleOwner) {
-                pbScore.secondaryProgress = it
+                pbScore.secondaryProgress = it.toInt()
             }
 
             viewModel.gameResult.observe(viewLifecycleOwner) {
@@ -113,20 +106,10 @@ class GameFragment : Fragment() {
         return ContextCompat.getColor(requireContext(), colorResId)
     }
 
-    private fun getLevel(): Level {
-        return requireArguments().getParcelable(KEY_LEVEL, Level::class.java)
-            ?: throw IllegalArgumentException("Level argument is missing!")
-    }
+    private fun launchGameFinishFragment(result: GameResult) {
+        findNavController().navigate(
+            GameFragmentDirections.actionGameFragmentToGameFinishFragment(result)
+        )
 
-    companion object {
-        fun newInstance(level: Level): GameFragment {
-            return GameFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(KEY_LEVEL, level)
-                }
-            }
-        }
-
-        const val NAME = "game_fragment"
     }
 }
