@@ -51,7 +51,7 @@ object GameRepositoryImpl: GameRepository {
             )
             Level.HARD -> GameSettings(
                 maxSumValue = 30,
-                minCountOfRightAnswers = 30,
+                minCountOfRightAnswers = 35,
                 minPercentOfRightAnswers = 90.00,
                 gameTimeInSeconds = 40
             )
