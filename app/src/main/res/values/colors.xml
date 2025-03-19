@@ -7,4 +7,6 @@
     <color name="light_gray">#E4E4DE</color>
     <color name="light_purple">#666AEB</color>
 
+    <color name="gradLightGreen">#60FB4B</color>
+    <color name="gradDarkGreen">#54BF44</color>
 </resources>

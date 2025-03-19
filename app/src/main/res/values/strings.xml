@@ -15,7 +15,6 @@
     <string name="btn_finish_text">Try again</string>
 
 
-
     <string name="title_welcome_screen">Quick Math</string>
     <string name="title_rules">Rules</string>
     <string name="title_level_difficulty">Choose Level Difficulty</string>
@@ -27,6 +26,9 @@
     <string name="description_score_answers_tv">Your score: %d</string>
     <string name="description_needed_answers_percentage_tv">The required percentage of correct answers: %.2f</string>
     <string name="description_percentage_answers">Percentage of correct answers: %.2f</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_start_game_title">Start</string>
 
 
 </resources>

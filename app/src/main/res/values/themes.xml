@@ -1,7 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Base.Theme.Composition" parent="Theme.Material3.DayNight.NoActionBar">
-
+        <item name="buttonStyle">@style/GreenButton</item>
     </style>
+
+
+    <style name="GreenButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_style_selector</item>
+    </style>
+
+
 
     <style name="OpinionTextStyle">
         <item name="android:padding">16dp</item>
@@ -20,13 +27,5 @@
 
 
     </style>
-
-
-
-
-
-
-
-
     <style name="Theme.Composition" parent="Base.Theme.Composition" />
 </resources>
