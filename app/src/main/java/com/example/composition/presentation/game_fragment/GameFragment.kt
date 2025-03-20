@@ -1,4 +1,4 @@
-package com.example.composition.presentation
+package com.example.composition.presentation.game_fragment
 
 
 import android.content.res.ColorStateList
@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.composition.databinding.FragmentGameBinding
 import com.example.composition.domain.entity.GameResult
+import com.example.composition.presentation.GeneralViewModelFactory
 
 class GameFragment : Fragment() {
 

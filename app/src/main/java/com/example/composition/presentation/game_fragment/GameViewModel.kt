@@ -1,4 +1,4 @@
-package com.example.composition.presentation
+package com.example.composition.presentation.game_fragment
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -61,7 +61,6 @@ class GameViewModel(
     private val _gameResult = MutableLiveData<GameResult>()
     val gameResult: LiveData<GameResult>
         get() = _gameResult
-
 
     init {
         startGame()
@@ -156,10 +155,8 @@ class GameViewModel(
             gameSettings.minCountOfRightAnswers
         )
 
-        _enoughCountOfRightAnswers.value =
-            countOfRightAnswers >= gameSettings.minCountOfRightAnswers
+        _enoughCountOfRightAnswers.value = countOfRightAnswers >= gameSettings.minCountOfRightAnswers
         _enoughPercentOfRightAnswers.value = percent >= gameSettings.minPercentOfRightAnswers
-
     }
 
     companion object {

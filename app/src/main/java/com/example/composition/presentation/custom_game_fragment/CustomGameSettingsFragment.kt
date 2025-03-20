@@ -1,5 +1,5 @@
 
-package com.example.composition.presentation
+package com.example.composition.presentation.custom_game_fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.composition.databinding.FragmentCustomGameSettingsBinding
-import com.example.composition.domain.entity.GameSettings
-import com.example.composition.domain.entity.Level
 
 
 class CustomGameSettingsFragment : Fragment() {
