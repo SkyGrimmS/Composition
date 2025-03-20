@@ -35,8 +35,19 @@ class ChooseLevelFragment : Fragment() {
             ).forEach { (button, level) ->
                 button.setOnClickListener { launchGameFragment(level) }
             }
+
+            btnBack.setOnClickListener {
+                launchMainMenuFragment()
+            }
         }
     }
+
+    private fun launchMainMenuFragment() {
+        findNavController().navigate(
+            ChooseLevelFragmentDirections.actionChooseLevelFragmentToGameMainMenuFragment()
+        )
+    }
+
 
     private fun launchGameFragment(level: Level) {
         findNavController().navigate(
