@@ -67,6 +67,7 @@
             android:id="@+id/action_gameMainMenuFragment_to_customGameSettingsFragment"
             app:destination="@id/customGameSettingsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/customGameSettingsFragment"
         android:name="com.example.composition.presentation.CustomGameSettingsFragment"
@@ -79,4 +80,5 @@
             android:id="@+id/action_customGameSettingsFragment_to_gameMainMenuFragment"
             app:destination="@id/gameMainMenuFragment" />
     </fragment>
+
 </navigation>
