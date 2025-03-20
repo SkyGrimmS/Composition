@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@color/light_gray"
 
-        tools:context=".presentation.RulesFragment">
+        tools:context=".presentation.rules_fragment.RulesFragment">
 
 
         <TextView

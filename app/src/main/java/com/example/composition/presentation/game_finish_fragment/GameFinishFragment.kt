@@ -1,4 +1,4 @@
-package com.example.composition.presentation
+package com.example.composition.presentation.game_finish_fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

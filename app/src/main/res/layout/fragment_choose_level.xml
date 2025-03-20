@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_gray"
     android:orientation="vertical"
-    tools:context=".presentation.ChooseLevelFragment">
+    tools:context=".presentation.choose_level_fragment.ChooseLevelFragment">
 
 
     <TextView
