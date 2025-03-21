@@ -53,7 +53,7 @@ object GameRepositoryImpl: GameRepository {
                 maxSumValue = 30,
                 minCountOfRightAnswers = 35,
                 minPercentOfRightAnswers = 90.00,
-                gameTimeInSeconds = 40
+                gameTimeInSeconds = 60
             )
         }
     }

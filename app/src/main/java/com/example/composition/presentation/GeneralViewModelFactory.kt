@@ -18,9 +18,7 @@ class GeneralViewModelFactory(
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(GameViewModel::class.java)) {
-            val gameSettings = params?.find { it is GameSettings } as? GameSettings
-                ?: throw IllegalArgumentException("Game settings parameter not provided!")
-            return GameViewModel(application, gameSettings) as T
+            return GameViewModel(application) as T
         }
 
         if (modelClass.isAssignableFrom(MainMenuFragmentViewModel::class.java)){

@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.composition.databinding.FragmentGameBinding
 import com.example.composition.domain.entity.GameResult
+import com.example.composition.domain.entity.GameSettings
 import com.example.composition.presentation.GeneralViewModelFactory
 
 class GameFragment : Fragment() {
@@ -21,7 +22,7 @@ class GameFragment : Fragment() {
     private val args by navArgs<GameFragmentArgs>()
 
     private val viewModelFactory by lazy {
-        GeneralViewModelFactory(listOf(args.gameSettings), requireActivity().application)
+        GeneralViewModelFactory(listOf(), requireActivity().application)
     }
 
     private val viewModel: GameViewModel by lazy {
@@ -40,6 +41,7 @@ class GameFragment : Fragment() {
         getAnswerOptionsList()
         setupObservers(tvOptions)
 
+        viewModel.setupGame(args.gameSettings)
         return binding.root
     }
 
@@ -91,6 +93,8 @@ class GameFragment : Fragment() {
             }
         }
     }
+
+
 
     private fun getAnswerOptionsList(): MutableList<TextView> {
         with(binding) {

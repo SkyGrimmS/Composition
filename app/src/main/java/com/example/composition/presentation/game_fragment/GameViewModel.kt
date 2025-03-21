@@ -12,10 +12,10 @@ import com.example.composition.domain.entity.GameResult
 import com.example.composition.domain.entity.GameSettings
 import com.example.composition.domain.entity.Question
 import com.example.composition.domain.usecases.GenerateQuestionUseCase
+import kotlin.math.max
 
 class GameViewModel(
     private val application: Application,
-    private val gameSettings: GameSettings
 ) : ViewModel() {
 
     private val repository = GameRepositoryImpl
@@ -57,19 +57,23 @@ class GameViewModel(
     val gameResult: LiveData<GameResult>
         get() = _gameResult
 
-    init {
-        startGame()
+    private var maxSumValue = -1
+    private var minPercentOfRightAnswers = -1.0
+    private var minCountOfRightAnswers = -1
+
+   fun setupGame(gameSettings: GameSettings) {
+       maxSumValue = gameSettings.maxSumValue
+       minPercentOfRightAnswers = gameSettings.minPercentOfRightAnswers
+       minCountOfRightAnswers = gameSettings.minCountOfRightAnswers
+
+
+       setMinPercent()
+       startTimer(gameSettings)
+       generateQuestion()
+       updateProgress()
     }
 
-
-    private fun startGame() {
-        setMinPercent()
-        startTimer()
-        generateQuestion()
-        updateProgress()
-    }
-
-    private fun onFinishGame() {
+    private fun onFinishGame(gameSettings: GameSettings) {
         _gameResult.value = GameResult(
             winner = enoughPercentOfRightAnswers.value == true && enoughCountOfRightAnswers.value == true,
             countOfRightAnswers = countOfRightAnswers,
@@ -78,7 +82,7 @@ class GameViewModel(
         )
     }
 
-    private fun startTimer() {
+    private fun startTimer(gameSettings:GameSettings) {
         timer = object : CountDownTimer(
             gameSettings.gameTimeInSeconds * MILLIS_IN_SECONDS,
             MILLIS_IN_SECONDS
@@ -89,7 +93,7 @@ class GameViewModel(
             }
 
             override fun onFinish() {
-                onFinishGame()
+                onFinishGame(gameSettings)
             }
         }
         timer?.start()
@@ -108,15 +112,15 @@ class GameViewModel(
         timer?.cancel()
     }
 
-    private fun setMinPercent(){
-        _minPercent.value = gameSettings.minPercentOfRightAnswers
+    private fun setMinPercent() {
+        _minPercent.value = minPercentOfRightAnswers
     }
 
     private fun generateQuestion() {
-        _question.value = generateQuestionUseCase(gameSettings.maxSumValue)
+        _question.value = generateQuestionUseCase(maxSumValue)
     }
 
-    fun chooseAnswer(number: Int) {
+    fun chooseAnswer(number: Int,) {
         checkAnswer(number)
         updateProgress()
         generateQuestion()
@@ -146,11 +150,12 @@ class GameViewModel(
         _progressAnswers.value = String.format(
             application.resources.getString(R.string.description_right_answers),
             countOfRightAnswers,
-            gameSettings.minCountOfRightAnswers
+            minCountOfRightAnswers
         )
 
-        _enoughCountOfRightAnswers.value = countOfRightAnswers >= gameSettings.minCountOfRightAnswers
-        _enoughPercentOfRightAnswers.value = percent >= gameSettings.minPercentOfRightAnswers
+        _enoughCountOfRightAnswers.value =
+            countOfRightAnswers >= minCountOfRightAnswers
+        _enoughPercentOfRightAnswers.value = percent >= minPercentOfRightAnswers
     }
 
     companion object {
