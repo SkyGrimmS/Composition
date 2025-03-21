@@ -20,9 +20,8 @@ class GameFragment : Fragment() {
 
     private val args by navArgs<GameFragmentArgs>()
 
-
     private val viewModelFactory by lazy {
-        GeneralViewModelFactory(listOf(args.level), requireActivity().application)
+        GeneralViewModelFactory(listOf(args.gameSettings), requireActivity().application)
     }
 
     private val viewModel: GameViewModel by lazy {

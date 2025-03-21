@@ -10,20 +10,15 @@ import com.example.composition.R
 import com.example.composition.data.GameRepositoryImpl
 import com.example.composition.domain.entity.GameResult
 import com.example.composition.domain.entity.GameSettings
-import com.example.composition.domain.entity.Level
 import com.example.composition.domain.entity.Question
 import com.example.composition.domain.usecases.GenerateQuestionUseCase
-import com.example.composition.domain.usecases.GetGameSettingsUseCase
 
 class GameViewModel(
     private val application: Application,
-    private val level: Level,
+    private val gameSettings: GameSettings
 ) : ViewModel() {
 
-    private lateinit var gameSettings: GameSettings
-
     private val repository = GameRepositoryImpl
-    private val getGameSettingsUseCase = GetGameSettingsUseCase(repository)
     private val generateQuestionUseCase = GenerateQuestionUseCase(repository)
 
     private var timer: CountDownTimer? = null
@@ -68,7 +63,7 @@ class GameViewModel(
 
 
     private fun startGame() {
-        getGameSettings()
+        setMinPercent()
         startTimer()
         generateQuestion()
         updateProgress()
@@ -113,8 +108,7 @@ class GameViewModel(
         timer?.cancel()
     }
 
-    private fun getGameSettings() {
-        this.gameSettings = getGameSettingsUseCase(level)
+    private fun setMinPercent(){
         _minPercent.value = gameSettings.minPercentOfRightAnswers
     }
 
