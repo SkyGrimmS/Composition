@@ -17,7 +17,7 @@ import com.example.composition.presentation.game_fragment.GameViewModel
 class CustomGameSettingsFragment : Fragment() {
     private lateinit var binding: FragmentCustomGameSettingsBinding
 
-    private val userGameSettings = GameSettings(3,5,7.0, 10)
+    private val userGameSettings = GameSettings(10,5,7.0, 10)
 
     private val viewModelFactory by lazy {
         GeneralViewModelFactory(listOf(userGameSettings), requireActivity().application)
