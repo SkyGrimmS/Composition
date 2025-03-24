@@ -10,7 +10,7 @@ class CustomGameViewModel : ViewModel() {
     private var dataGameSettings: GameSettings? = null
 
     private val _errorInputMaxSum = MutableLiveData<Boolean>()
-    val errorInputName: LiveData<Boolean> get() = _errorInputMaxSum
+    val errorInputMaxSum: LiveData<Boolean> get() = _errorInputMaxSum
 
     private val _errorInputMinCountOfRightAnswers = MutableLiveData<Boolean>()
     val errorInputMinCountOfRightAnswers: LiveData<Boolean> get() = _errorInputMinCountOfRightAnswers

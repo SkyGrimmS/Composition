@@ -67,16 +67,16 @@ class CustomGameSettingsFragment : Fragment() {
         with(binding){
 
             etSumValue.doAfterTextChanged {
-                parseMaxSumValue(it.toString().trim())
+                parseMaxSumValue(it.toString().trim().toIntOrNull())
             }
             etMinCountOfRightAnswers.doAfterTextChanged {
-                parseMinCountOfRightAnswers(it.toString().trim())
+                parseMinCountOfRightAnswers(it.toString().trim().toIntOrNull()))
             }
             etMinPercentOfRightAnswers.doAfterTextChanged {
-                parseMinPercentOfRightAnswers(it.toString().trim())
+                parseMinPercentOfRightAnswers(it.toString().trim().toIntOrNull()))
             }
             etGameTime.doAfterTextChanged {
-                parseGameTime(it.toString().trim())
+                parseGameTime(it.toString().trim().toIntOrNull()))
             }
 
         }
@@ -86,24 +86,28 @@ class CustomGameSettingsFragment : Fragment() {
 
 
 
-    private fun parseMaxSumValue(maxSum:String){
-        if (maxSum.isFieldValid()){
+    private fun parseMaxSumValue(maxSum:Int?){
+        maxSum?.let {
             if (maxSum.isSumMoreThanSeven()){
-                viewModel.onEvent(EventCustomGS.OnMaxSumValue(maxSum.toInt()))
+                viewModel.onEvent(EventCustomGS.OnMaxSumValue(maxSum))
+                viewModel.resetErrorInputMaxSum()
+            }else{
+
             }
         }
     }
 
-    private fun parseMinCountOfRightAnswers(count:String):Boolean{
-        return count.isParamMoreThanOne()
+    private fun parseMinCountOfRightAnswers(count:Int?){
+
+
     }
 
-    private fun parseGameTime(gameTime:String):Boolean{
-        return gameTime.isParamMoreThanOne()
+    private fun parseMinPercentOfRightAnswers(percent:Int?){
+
     }
 
-    private fun parseMinPercentOfRightAnswers(percent:String):Boolean{
-        return percent.isParamMoreThanOne()
+    private fun parseGameTime(gameTime:Int?){
+
     }
 
 
