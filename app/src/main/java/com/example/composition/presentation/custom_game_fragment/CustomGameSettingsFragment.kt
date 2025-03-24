@@ -1,4 +1,3 @@
-
 package com.example.composition.presentation.custom_game_fragment
 
 import android.os.Bundle
@@ -15,6 +14,7 @@ import com.example.composition.presentation.GeneralViewModelFactory
 import com.example.composition.utils.isFieldValid
 import com.example.composition.utils.isParamMoreThanOne
 import com.example.composition.utils.isSumMoreThanSeven
+import com.google.android.material.textfield.TextInputLayout
 
 
 class CustomGameSettingsFragment : Fragment() {
@@ -23,7 +23,7 @@ class CustomGameSettingsFragment : Fragment() {
     private val viewModelFactory by lazy {
         GeneralViewModelFactory(listOf(), requireActivity().application)
     }
-    private val viewModel: CustomGameViewModel by lazy{
+    private val viewModel: CustomGameViewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[CustomGameViewModel::class.java]
     }
 
@@ -44,8 +44,7 @@ class CustomGameSettingsFragment : Fragment() {
     }
 
 
-
-    private fun setListeners(){
+    private fun setListeners() {
         with(binding) {
 
             btnBack.setOnClickListener {
@@ -54,7 +53,7 @@ class CustomGameSettingsFragment : Fragment() {
             btnStartGame.setOnClickListener {
 
                 launchGameFragment()
-             }
+            }
 
 
         }
@@ -62,12 +61,11 @@ class CustomGameSettingsFragment : Fragment() {
     }
 
 
-
-    private fun setAfterTextChangedListeners(){
-        with(binding){
+    private fun setAfterTextChangedListeners() {
+        with(binding) {
 
             etSumValue.doAfterTextChanged {
-                parseMaxSumValue(it.toString().trim())
+                parseMaxSumValue(it.toString().trim(), tilMaxSumValue)
             }
             etMinCountOfRightAnswers.doAfterTextChanged {
                 parseMinCountOfRightAnswers(it.toString().trim())
@@ -83,32 +81,30 @@ class CustomGameSettingsFragment : Fragment() {
     }
 
 
-
-
-
-    private fun parseMaxSumValue(maxSum:String){
-        if (maxSum.isFieldValid()){
-            if (maxSum.isSumMoreThanSeven()){
-                viewModel.onEvent(CustomGameSettingScreenEvent.OnMaxSumValue(maxSum.toInt()))
-            }
+    private fun parseMaxSumValue(maxSum: String, tilMaxSumValue: TextInputLayout) {
+        if (maxSum.isFieldValid() && maxSum.isSumMoreThanSeven()) {
+            viewModel.onEvent(CustomGameSettingScreenEvent.OnMaxSumValue(maxSum.toInt()))
+            tilMaxSumValue.setError(null)
+        } else {
+            tilMaxSumValue.setError("text")
         }
     }
 
-    private fun parseMinCountOfRightAnswers(count:String):Boolean{
+
+    private fun parseMinCountOfRightAnswers(count: String): Boolean {
         return count.isParamMoreThanOne()
     }
 
-    private fun parseGameTime(gameTime:String):Boolean{
+    private fun parseGameTime(gameTime: String): Boolean {
         return gameTime.isParamMoreThanOne()
     }
 
-    private fun parseMinPercentOfRightAnswers(percent:String):Boolean{
+    private fun parseMinPercentOfRightAnswers(percent: String): Boolean {
         return percent.isParamMoreThanOne()
     }
 
 
-
-    private fun launchMainMenuFragment(){
+    private fun launchMainMenuFragment() {
         findNavController().navigate(
             CustomGameSettingsFragmentDirections.actionCustomGameSettingsFragmentToGameMainMenuFragment()
         )
@@ -116,7 +112,9 @@ class CustomGameSettingsFragment : Fragment() {
 
     private fun launchGameFragment(gameSettings: GameSettings) {
         findNavController().navigate(
-            CustomGameSettingsFragmentDirections.actionCustomGameSettingsFragmentToGameFragment(gameSettings)
+            CustomGameSettingsFragmentDirections.actionCustomGameSettingsFragmentToGameFragment(
+                gameSettings
+            )
         )
     }
 

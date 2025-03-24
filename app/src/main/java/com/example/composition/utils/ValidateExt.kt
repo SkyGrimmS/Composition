@@ -1,6 +1,8 @@
 package com.example.composition.utils
 
-fun String?.isFieldValid():Boolean = !this.isNullOrBlank()
+import com.google.android.material.textfield.TextInputLayout
+
+fun String?.isFieldValid(): Boolean = !this.isNullOrBlank()
 
 fun String.isSumMoreThanSeven(): Boolean {
     val sum = this.toInt()
@@ -12,7 +14,12 @@ fun String.isParamMoreThanOne(): Boolean {
     return (param >= MIN_SETTINGS_VALUE)
 }
 
-
+fun TextInputLayout.setError(textError: String? = null) {
+    this.isErrorEnabled = textError == null
+    textError?.let {
+        this.error = it
+    }
+}
 
 const val MIN_SUM = 7
-const val MIN_SETTINGS_VALUE= 1
+const val MIN_SETTINGS_VALUE = 1
