@@ -5,25 +5,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.composition.databinding.FragmentCustomGameSettingsBinding
 import com.example.composition.domain.entity.GameSettings
 import com.example.composition.presentation.GeneralViewModelFactory
-import com.example.composition.presentation.game_fragment.GameViewModel
+import com.example.composition.utils.isFieldValid
+import com.example.composition.utils.isParamMoreThanOne
+import com.example.composition.utils.isSumMoreThanSeven
 
 
 class CustomGameSettingsFragment : Fragment() {
     private lateinit var binding: FragmentCustomGameSettingsBinding
 
-    private val userGameSettings = GameSettings(7,5,7.0, 10)
-
     private val viewModelFactory by lazy {
-        GeneralViewModelFactory(listOf(userGameSettings), requireActivity().application)
+        GeneralViewModelFactory(listOf(), requireActivity().application)
     }
-    private val viewModel: GameViewModel by lazy{
-        ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
+    private val viewModel: CustomGameViewModel by lazy{
+        ViewModelProvider(this, viewModelFactory)[CustomGameViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -34,8 +35,15 @@ class CustomGameSettingsFragment : Fragment() {
         setListeners()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
 
     }
+
+
 
     private fun setListeners(){
         with(binding) {
@@ -43,12 +51,62 @@ class CustomGameSettingsFragment : Fragment() {
             btnBack.setOnClickListener {
                 launchMainMenuFragment()
             }
-
             btnStartGame.setOnClickListener {
-                launchGameFragment(userGameSettings)
+
+                launchGameFragment()
              }
+
+
+        }
+        setAfterTextChangedListeners()
+    }
+
+
+
+    private fun setAfterTextChangedListeners(){
+        with(binding){
+
+            etSumValue.doAfterTextChanged {
+                parseMaxSumValue(it.toString().trim())
+            }
+            etMinCountOfRightAnswers.doAfterTextChanged {
+                parseMinCountOfRightAnswers(it.toString().trim())
+            }
+            etMinPercentOfRightAnswers.doAfterTextChanged {
+                parseMinPercentOfRightAnswers(it.toString().trim())
+            }
+            etGameTime.doAfterTextChanged {
+                parseGameTime(it.toString().trim())
+            }
+
         }
     }
+
+
+
+
+
+    private fun parseMaxSumValue(maxSum:String){
+        if (maxSum.isFieldValid()){
+            if (maxSum.isSumMoreThanSeven()){
+                viewModel.onEvent(EventCustomGS.OnMaxSumValue(maxSum.toInt()))
+            }
+        }
+    }
+
+    private fun parseMinCountOfRightAnswers(count:String):Boolean{
+        return count.isParamMoreThanOne()
+    }
+
+    private fun parseGameTime(gameTime:String):Boolean{
+        return gameTime.isParamMoreThanOne()
+    }
+
+    private fun parseMinPercentOfRightAnswers(percent:String):Boolean{
+        return percent.isParamMoreThanOne()
+    }
+
+
 
     private fun launchMainMenuFragment(){
         findNavController().navigate(
