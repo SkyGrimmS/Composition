@@ -54,7 +54,7 @@ class GameFinishFragment : Fragment() {
 
             tvRequiredPercentage.text = String.format(
                 getString(R.string.description_needed_answers_percentage_tv),
-                result.gameSettings.minPercentOfRightAnswers
+                result.gameSettings.minPercentOfRightAnswers.toDouble()
             )
 
             tvScorePercentage.text = String.format(
@@ -72,11 +72,11 @@ class GameFinishFragment : Fragment() {
         }
     }
 
-    private fun getPercentOfRightAnswers(result: GameResult): Float = with(result) {
+    private fun getPercentOfRightAnswers(result: GameResult): Double = with(result) {
         if (countOfRightAnswers != 0) {
-            ((countOfRightAnswers) / countOfQuestions.toFloat() * 100)
+            ((countOfRightAnswers) / countOfQuestions.toDouble() * 100)
         } else {
-            this.countOfRightAnswers.toFloat()
+            this.countOfRightAnswers.toDouble()
         }
     }
 

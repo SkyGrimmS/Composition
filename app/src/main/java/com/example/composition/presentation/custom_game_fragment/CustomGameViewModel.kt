@@ -7,56 +7,60 @@ import com.example.composition.domain.entity.GameSettings
 
 class CustomGameViewModel : ViewModel() {
 
-    private var dataGameSettings: GameSettings? = null
+    private val _isFieldsFilled = MutableLiveData<Boolean>()
+    val isFieldsFilled: LiveData<Boolean> get() = _isFieldsFilled
 
-    private val _errorInputMaxSum = MutableLiveData<Boolean>()
-    val errorInputMaxSum: LiveData<Boolean> get() = _errorInputMaxSum
 
-    private val _errorInputMinCountOfRightAnswers = MutableLiveData<Boolean>()
-    val errorInputMinCountOfRightAnswers: LiveData<Boolean> get() = _errorInputMinCountOfRightAnswers
-
-    private val _errorInputMinPercentOfRightAnswers = MutableLiveData<Boolean>()
-    val errorInputMinPercentOfRightAnswers: LiveData<Boolean> get() = _errorInputMinPercentOfRightAnswers
-
-    private val _errorInputTime = MutableLiveData<Boolean>()
-    val errorInputTime: LiveData<Boolean> get() = _errorInputTime
-
-    fun onEvent(event: EventCustomGS) {
-        when (event) {
-            is EventCustomGS.OnMaxSumValue -> {
-
-            }
-            is EventCustomGS.OnCountOfRightAnswer -> {
-
-            }
-            is EventCustomGS.OnGameTime -> {
-
-            }
-            is EventCustomGS.OnPercentOfRightAnswer -> {
-
-            }
+    private var screenState =
+        MutableLiveData<CustomGameSettingScreenState>().apply {
+            value = CustomGameSettingScreenState()
         }
 
+    fun onEvent(event: CustomGameSettingModels) {
+        when (event) {
+            is CustomGameSettingModels.OnMaxSumValue -> {
+                screenState.value = screenState.value?.copy(maxSum = event.maxSum)
+            }
 
+            is CustomGameSettingModels.OnCountOfRightAnswer -> {
+                screenState.value = screenState.value?.copy(minCountOfRightAnswer = event.count)
+            }
+
+            is CustomGameSettingModels.OnGameTime -> {
+                screenState.value = screenState.value?.copy(gameTime = event.gameTime)
+            }
+
+            is CustomGameSettingModels.OnPercentOfRightAnswer -> {
+                screenState.value = screenState.value?.copy(minPercentOfRightAnswer = event.percent)
+            }
+        }
+        validateGameSettings()
+    }
+
+    private fun validateGameSettings() {
+        _isFieldsFilled.value = screenState.value?.let { state ->
+            state.gameTime != DEFAULT_VALUE &&
+                    state.maxSum != DEFAULT_VALUE &&
+                    state.minCountOfRightAnswer != DEFAULT_VALUE &&
+                    state.minPercentOfRightAnswer != DEFAULT_VALUE
+        } ?: false
 
     }
 
-
-    fun resetErrorInputMaxSum() {
-        _errorInputMaxSum.value = false
+    fun getGameSettings(): GameSettings? {
+        return screenState.value?.let { state ->
+            GameSettings(
+                state.maxSum,
+                state.minCountOfRightAnswer,
+                state.minPercentOfRightAnswer,
+                state.gameTime
+            )
+        }
     }
 
-    fun resetErrorInputMinCountOfRightAnswers() {
-        _errorInputMinCountOfRightAnswers.value = false
+    companion object {
+        const val DEFAULT_VALUE = -1
     }
-
-    fun resetInputMinPercentOfRightAnswers() {
-        _errorInputMinPercentOfRightAnswers.value = false
-    }
-
-    fun resetErrorInputTime() {
-        _errorInputMinCountOfRightAnswers.value = false
-    }
-
 
 }
+

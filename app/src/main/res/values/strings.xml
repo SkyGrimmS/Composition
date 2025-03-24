@@ -32,9 +32,10 @@
     <string name="description_needed_answers_percentage_tv">Required percentage of answers: %.2f</string>
     <string name="description_percentage_answers">Percentage of answers: %.2f</string>
 
-
-
-
+    <string name="error_max_sum_value">Parameter Max Sum Value is invalid, please write correct value! (Min: 7) </string>
+    <string name="error_min_percent_of_right_answers">Parameter Min Percent Of Right Answers is invalid, please write correct value!</string>
+    <string name="error_min_count_of_right_answers">Parameter Min Count Of Right Answers is invalid, please write correct value!</string>
+    <string name="error_game_time">Parameter Game Time is invalid, please write correct value!</string>
 
 
     <string name="hint_max_sum_value">Max sum value:</string>

@@ -63,7 +63,7 @@ class GameViewModel(
 
    fun setupGame(gameSettings: GameSettings) {
        maxSumValue = gameSettings.maxSumValue
-       minPercentOfRightAnswers = gameSettings.minPercentOfRightAnswers
+       minPercentOfRightAnswers = gameSettings.minPercentOfRightAnswers.toDouble()
        minCountOfRightAnswers = gameSettings.minCountOfRightAnswers
 
 
