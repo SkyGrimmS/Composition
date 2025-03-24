@@ -89,7 +89,7 @@ class CustomGameSettingsFragment : Fragment() {
     private fun parseMaxSumValue(maxSum:String){
         if (maxSum.isFieldValid()){
             if (maxSum.isSumMoreThanSeven()){
-                viewModel.onEvent(EventCustomGS.OnMaxSumValue(maxSum.toInt()))
+                viewModel.onEvent(CustomGameSettingScreenEvent.OnMaxSumValue(maxSum.toInt()))
             }
         }
     }

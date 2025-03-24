@@ -21,22 +21,29 @@ class CustomGameViewModel : ViewModel() {
     private val _errorInputTime = MutableLiveData<Boolean>()
     val errorInputTime: LiveData<Boolean> get() = _errorInputTime
 
-    fun onEvent(event: EventCustomGS) {
+    private var screenState =
+        MutableLiveData<CustomGameSettingScreenState>().apply {
+        value = CustomGameSettingScreenState()
+    }
+
+    fun onEvent(event: CustomGameSettingScreenEvent) {
         when (event) {
-            is EventCustomGS.OnMaxSumValue -> {
+            is CustomGameSettingScreenEvent.OnMaxSumValue -> {
+                screenState.value = screenState.value?.copy(maxSum = 1)
+            }
+
+            is CustomGameSettingScreenEvent.OnCountOfRightAnswer -> {
 
             }
-            is EventCustomGS.OnCountOfRightAnswer -> {
+
+            is CustomGameSettingScreenEvent.OnGameTime -> {
 
             }
-            is EventCustomGS.OnGameTime -> {
 
-            }
-            is EventCustomGS.OnPercentOfRightAnswer -> {
+            is CustomGameSettingScreenEvent.OnPercentOfRightAnswer -> {
 
             }
         }
-
 
 
     }
