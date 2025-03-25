@@ -10,7 +10,6 @@ class CustomGameViewModel : ViewModel() {
     private val _isFieldsFilled = MutableLiveData<Boolean>()
     val isFieldsFilled: LiveData<Boolean> get() = _isFieldsFilled
 
-
     private var screenState =
         MutableLiveData<CustomGameSettingScreenState>().apply {
             value = CustomGameSettingScreenState()
